@@ -6,6 +6,7 @@ import { Border, NavigationBar, Spacing, Tab } from 'tosslib';
 import { SavingsProduct as SavingsProductType, SavingsProductCalculatorParameters } from 'types';
 
 export function SavingsCalculatorPage() {
+  const [selectedTab, setSelectedTab] = useState('products');
   const [savingsProductCalculatorParameters, setSavingsProductCalculatorParameters] = useState<
     Partial<SavingsProductCalculatorParameters>
   >({});
@@ -35,24 +36,26 @@ export function SavingsCalculatorPage() {
       <Border height={16} />
       <Spacing size={8} />
 
-      <Tab onChange={() => {}}>
-        <Tab.Item value="products" selected={true}>
+      <Tab onChange={setSelectedTab}>
+        <Tab.Item value="products" selected={selectedTab === 'products'}>
           적금 상품
         </Tab.Item>
-        <Tab.Item value="results" selected={false}>
+        <Tab.Item value="results" selected={selectedTab === 'results'}>
           계산 결과
         </Tab.Item>
       </Tab>
-      <SavingsProductList
-        savingsProductCalculatorParameters={savingsProductCalculatorParameters}
-        renderSavingsProduct={savingsProduct => (
-          <SavingsProduct
-            savingsProduct={savingsProduct}
-            onClick={() => handleSelectedSavingsProductChange(savingsProduct)}
-            isSelected={selectedSavingsProduct?.id === savingsProduct.id}
-          />
-        )}
-      />
+      {selectedTab === 'products' && (
+        <SavingsProductList
+          savingsProductCalculatorParameters={savingsProductCalculatorParameters}
+          renderSavingsProduct={savingsProduct => (
+            <SavingsProduct
+              savingsProduct={savingsProduct}
+              onClick={() => handleSelectedSavingsProductChange(savingsProduct)}
+              isSelected={selectedSavingsProduct?.id === savingsProduct.id}
+            />
+          )}
+        />
+      )}
 
       {/* 아래는 계산 결과 탭 내용이에요. 계산 결과 탭을 구현할 때 주석을 해제해주세요. */}
       {/* <Spacing size={8} />
