@@ -1,5 +1,6 @@
 import { Assets, colors, ListRow } from 'tosslib';
 import { SavingsProduct as SavingsProductType } from 'types';
+import { formatNumberToWon } from 'utils';
 
 type Props = SavingsProductType & { onClick: () => void };
 
@@ -22,7 +23,7 @@ export default function SavingsProduct({
           topProps={{ fontSize: 16, fontWeight: 'bold', color: colors.grey900 }}
           middle={`연 이자율: ${annualRate}%`}
           middleProps={{ fontSize: 14, color: colors.blue600, fontWeight: 'medium' }}
-          bottom={`${minMonthlyAmount}원 ~ ${maxMonthlyAmount}원 | ${availableTerms}개월`}
+          bottom={`${formatNumberToWon(minMonthlyAmount)}원 ~ ${formatNumberToWon(maxMonthlyAmount)}원 | ${availableTerms}개월`}
           bottomProps={{ fontSize: 13, color: colors.grey600 }}
         />
       }
