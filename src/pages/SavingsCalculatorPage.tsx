@@ -1,11 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
+import SavingsProduct from 'components/SavingsProduct';
 import SavingsProductList from 'components/SavingsProductList';
-import { getSavingsProducts } from 'services';
 import { Border, NavigationBar, SelectBottomSheet, Spacing, Tab, TextField } from 'tosslib';
 
 export function SavingsCalculatorPage() {
-  const savingsProductsQuery = useQuery({ queryKey: ['savingsProducts'], queryFn: getSavingsProducts });
-
   return (
     <>
       <NavigationBar title="적금 계산기" />
@@ -34,11 +31,20 @@ export function SavingsCalculatorPage() {
           계산 결과
         </Tab.Item>
       </Tab>
-      {savingsProductsQuery.isLoading ? (
-        '적금 상품을 불러오는 중입니다.'
-      ) : (
-        <SavingsProductList savings={savingsProductsQuery.data ?? []} onSavingClick={() => {}} />
-      )}
+      <SavingsProductList
+        renderSavingsProduct={({ id, name, annualRate, availableTerms, maxMonthlyAmount, minMonthlyAmount }) => (
+          <SavingsProduct
+            id={id}
+            name={name}
+            annualRate={annualRate}
+            availableTerms={availableTerms}
+            maxMonthlyAmount={maxMonthlyAmount}
+            minMonthlyAmount={minMonthlyAmount}
+            onClick={() => {}}
+          />
+        )}
+      />
+
       {/* 아래는 계산 결과 탭 내용이에요. 계산 결과 탭을 구현할 때 주석을 해제해주세요. */}
       {/* <Spacing size={8} />
 
