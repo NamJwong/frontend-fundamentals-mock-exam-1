@@ -3,12 +3,23 @@ import SavingsProductCalculator from 'components/SavingsProductCalculator';
 import SavingsProductList from 'components/SavingsProductList';
 import { useState } from 'react';
 import { Border, NavigationBar, Spacing, Tab } from 'tosslib';
-import { SavingsProductCalculatorParameters } from 'types';
+import { SavingsProduct as SavingsProductType, SavingsProductCalculatorParameters } from 'types';
 
 export function SavingsCalculatorPage() {
   const [savingsProductCalculatorParameters, setSavingsProductCalculatorParameters] = useState<
     Partial<SavingsProductCalculatorParameters>
   >({});
+  const [selectedSavingsProduct, setSelectedSavingsProduct] = useState<SavingsProductType>();
+
+  const handleSelectedSavingsProductChange = (value: SavingsProductType) => {
+    setSelectedSavingsProduct(prev => {
+      if (prev?.id === value.id) {
+        return undefined;
+      }
+      return value;
+    });
+  };
+
   return (
     <>
       <NavigationBar title="적금 계산기" />
@@ -34,15 +45,11 @@ export function SavingsCalculatorPage() {
       </Tab>
       <SavingsProductList
         savingsProductCalculatorParameters={savingsProductCalculatorParameters}
-        renderSavingsProduct={({ id, name, annualRate, availableTerms, maxMonthlyAmount, minMonthlyAmount }) => (
+        renderSavingsProduct={savingsProduct => (
           <SavingsProduct
-            id={id}
-            name={name}
-            annualRate={annualRate}
-            availableTerms={availableTerms}
-            maxMonthlyAmount={maxMonthlyAmount}
-            minMonthlyAmount={minMonthlyAmount}
-            onClick={() => {}}
+            savingsProduct={savingsProduct}
+            onClick={() => handleSelectedSavingsProductChange(savingsProduct)}
+            isSelected={selectedSavingsProduct?.id === savingsProduct.id}
           />
         )}
       />

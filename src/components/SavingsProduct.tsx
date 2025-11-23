@@ -2,16 +2,12 @@ import { Assets, colors, ListRow } from 'tosslib';
 import { SavingsProduct as SavingsProductType } from 'types';
 import { formatNumberToWon } from 'utils';
 
-type Props = SavingsProductType & { onClick: () => void };
+type Props = { savingsProduct: SavingsProductType; onClick: () => void; isSelected: boolean };
 
 export default function SavingsProduct({
-  id,
-  name,
-  annualRate,
-  availableTerms,
-  maxMonthlyAmount,
-  minMonthlyAmount,
+  savingsProduct: { id, name, annualRate, availableTerms, maxMonthlyAmount, minMonthlyAmount },
   onClick,
+  isSelected,
 }: Props) {
   return (
     <ListRow
@@ -27,7 +23,7 @@ export default function SavingsProduct({
           bottomProps={{ fontSize: 13, color: colors.grey600 }}
         />
       }
-      right={<Assets.Icon name="icon-check-circle-green" />}
+      right={isSelected ? <Assets.Icon name="icon-check-circle-green" /> : undefined}
       onClick={onClick}
     />
   );
