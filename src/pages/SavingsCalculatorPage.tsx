@@ -1,4 +1,5 @@
 import CalculationResult from 'components/CalculationResult';
+import RecommendedSavingsProductList from 'components/RecommendedSavingsProductList';
 import SavingsProduct from 'components/SavingsProduct';
 import SavingsProductCalculator from 'components/SavingsProductCalculator';
 import SavingsProductList from 'components/SavingsProductList';
@@ -60,10 +61,20 @@ export function SavingsCalculatorPage() {
 
       {selectedTab === 'results' &&
         (selectedSavingsProduct ? (
-          <CalculationResult
-            savingsProduct={selectedSavingsProduct}
-            savingsProductCalculatorParameters={savingsProductCalculatorParameters}
-          />
+          <>
+            <Spacing size={8} />
+            <CalculationResult
+              savingsProduct={selectedSavingsProduct}
+              savingsProductCalculatorParameters={savingsProductCalculatorParameters}
+            />
+            <Spacing size={8} />
+            <Border height={16} />
+            <Spacing size={8} />
+            <RecommendedSavingsProductList
+              savingsProductCalculatorParameters={savingsProductCalculatorParameters}
+              renderSavingsProduct={savingsProduct => <SavingsProduct savingsProduct={savingsProduct} />}
+            />
+          </>
         ) : (
           <ListRow contents={<ListRow.Texts type="1RowTypeA" top="상품을 선택해주세요." />} />
         ))}

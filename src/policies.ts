@@ -37,10 +37,15 @@ const calculate_추천_월_납입_금액 = (targetSavingsAmount: number, savingP
   return Math.round(rawAmount / 1000) * 1000;
 };
 
+const filterRecommendedSavingsProduct = (savingsProductList: SavingsProduct[]) => {
+  return savingsProductList.sort((a, b) => b.annualRate - a.annualRate).slice(0, 2);
+};
+
 export const savingsProductCalculatorPolicy = {
   filterSavingsProduct,
   validateParameters,
   calculate_목표_금액과의_차이,
   calculate_예상_수익_금액,
   calculate_추천_월_납입_금액,
+  filterRecommendedSavingsProduct,
 };

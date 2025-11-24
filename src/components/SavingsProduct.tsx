@@ -2,7 +2,7 @@ import { Assets, colors, ListRow } from 'tosslib';
 import { SavingsProduct as SavingsProductType } from 'types';
 import { formatNumberToWon } from 'utils';
 
-type Props = { savingsProduct: SavingsProductType; onClick: () => void; isSelected: boolean };
+type Props = { savingsProduct: SavingsProductType; onClick?: () => void; isSelected?: boolean };
 
 export default function SavingsProduct({
   savingsProduct: { id, name, annualRate, availableTerms, maxMonthlyAmount, minMonthlyAmount },
