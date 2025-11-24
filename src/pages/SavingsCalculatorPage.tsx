@@ -59,25 +59,26 @@ export function SavingsCalculatorPage() {
         />
       )}
 
-      {selectedTab === 'results' &&
-        (selectedSavingsProduct ? (
-          <>
-            <Spacing size={8} />
+      {selectedTab === 'results' && (
+        <>
+          <Spacing size={8} />
+          {selectedSavingsProduct ? (
             <CalculationResult
               savingsProduct={selectedSavingsProduct}
               savingsProductCalculatorParameters={savingsProductCalculatorParameters}
             />
-            <Spacing size={8} />
-            <Border height={16} />
-            <Spacing size={8} />
-            <RecommendedSavingsProductList
-              savingsProductCalculatorParameters={savingsProductCalculatorParameters}
-              renderSavingsProduct={savingsProduct => <SavingsProduct savingsProduct={savingsProduct} />}
-            />
-          </>
-        ) : (
-          <ListRow contents={<ListRow.Texts type="1RowTypeA" top="상품을 선택해주세요." />} />
-        ))}
+          ) : (
+            <ListRow contents={<ListRow.Texts type="1RowTypeA" top="상품을 선택해주세요." />} />
+          )}
+          <Spacing size={8} />
+          <Border height={16} />
+          <Spacing size={8} />
+          <RecommendedSavingsProductList
+            savingsProductCalculatorParameters={savingsProductCalculatorParameters}
+            renderSavingsProduct={savingsProduct => <SavingsProduct savingsProduct={savingsProduct} />}
+          />
+        </>
+      )}
     </>
   );
 }
