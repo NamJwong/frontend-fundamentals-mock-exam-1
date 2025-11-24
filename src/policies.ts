@@ -22,7 +22,25 @@ const validateParameters = (
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
+const calculate_예상_수익_금액 = (desiredMonthlyDeposit: number, savingPeriod: number, annualRate: number) => {
+  return desiredMonthlyDeposit * savingPeriod * (1 + annualRate * 0.5);
+};
+// eslint-disable-next-line @typescript-eslint/naming-convention
+const calculate_목표_금액과의_차이 = (targetSavingsAmount: number, savingPeriod: number, annualRate: number) => {
+  const rawAmount = targetSavingsAmount / (savingPeriod * (1 + annualRate * 0.5));
+  return Math.round(rawAmount / 1000) * 1000;
+};
+// eslint-disable-next-line @typescript-eslint/naming-convention
+const calculate_추천_월_납입_금액 = (targetSavingsAmount: number, savingPeriod: number, annualRate: number) => {
+  const rawAmount = targetSavingsAmount / (savingPeriod * (1 + annualRate * 0.5));
+  return Math.round(rawAmount / 1000) * 1000;
+};
+
 export const savingsProductCalculatorPolicy = {
   filterSavingsProduct,
   validateParameters,
+  calculate_목표_금액과의_차이,
+  calculate_예상_수익_금액,
+  calculate_추천_월_납입_금액,
 };
