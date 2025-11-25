@@ -4,7 +4,7 @@ import { SavingsProduct, SavingsProductCalculatorParameters } from 'types';
 import { formatNumberToWon } from 'utils';
 
 type Props = {
-  savingsProductCalculatorParameters: Partial<SavingsProductCalculatorParameters>;
+  savingsProductCalculatorParameters: SavingsProductCalculatorParameters;
   savingsProduct: SavingsProduct;
 };
 
@@ -12,9 +12,6 @@ export default function CalculationResult({
   savingsProductCalculatorParameters,
   savingsProduct: { annualRate },
 }: Props) {
-  if (!savingsProductCalculatorPolicy.validateParameters(savingsProductCalculatorParameters)) {
-    return <div>적금 계산기에 입력한 값을 확인해주세요.</div>;
-  }
   const { targetSavingsAmount, desiredMonthlyDeposit, savingPeriod } = savingsProductCalculatorParameters;
   return (
     <>
