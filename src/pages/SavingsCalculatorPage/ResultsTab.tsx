@@ -1,7 +1,7 @@
 import CalculationResult from 'components/CalculationResult';
 import SavingsProduct from 'components/SavingsProduct';
 import { savingsProductCalculatorPolicy } from 'policies';
-import { Border, ListRow, Spacing } from 'tosslib';
+import { Border, ListHeader, ListRow, Spacing } from 'tosslib';
 import { SavingsProduct as SavingsProductType, SavingsProductCalculatorParameters } from 'types';
 
 type Props = {
@@ -33,6 +33,8 @@ export default function ResultsTab({
       <Spacing size={8} />
       <Border height={16} />
       <Spacing size={8} />
+      <ListHeader title={<ListHeader.TitleParagraph fontWeight="bold">추천 상품 목록</ListHeader.TitleParagraph>} />
+      <Spacing size={12} />
       {recommendedSavingsProductList.length > 0 ? (
         recommendedSavingsProductList.map(savingsProduct => (
           <SavingsProduct key={savingsProduct.id} savingsProduct={savingsProduct} />
@@ -40,6 +42,7 @@ export default function ResultsTab({
       ) : (
         <div>해당하는 적금 상품이 없습니다.</div>
       )}
+      <Spacing size={40} />
     </>
   );
 }
