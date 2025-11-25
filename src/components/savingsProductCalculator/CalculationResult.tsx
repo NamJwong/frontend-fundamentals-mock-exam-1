@@ -4,15 +4,12 @@ import { SavingsProduct, SavingsProductCalculatorParameters } from 'types';
 import { formatNumberToWon } from 'utils';
 
 type Props = {
-  savingsProductCalculatorParameters: SavingsProductCalculatorParameters;
+  calculatorParameters: SavingsProductCalculatorParameters;
   savingsProduct: SavingsProduct;
 };
 
-export default function CalculationResult({
-  savingsProductCalculatorParameters,
-  savingsProduct: { annualRate },
-}: Props) {
-  const { targetSavingsAmount, desiredMonthlyDeposit, savingPeriod } = savingsProductCalculatorParameters;
+export default function CalculationResult({ calculatorParameters, savingsProduct: { annualRate } }: Props) {
+  const { targetSavingsAmount, desiredMonthlyDeposit, savingPeriod } = calculatorParameters;
   return (
     <>
       <ListRow

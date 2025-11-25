@@ -1,4 +1,4 @@
-import CalculationResult from 'components/CalculationResult';
+import CalculationResult from 'components/savingsProductCalculator/CalculationResult';
 import SavingsProduct from 'components/SavingsProduct';
 import { savingsProductCalculatorPolicy } from 'policies';
 import { Border, ListHeader, ListRow, Spacing } from 'tosslib';
@@ -7,15 +7,11 @@ import { SavingsProduct as SavingsProductType, SavingsProductCalculatorParameter
 type Props = {
   selectedSavingsProduct: SavingsProductType | undefined;
   savingsProductList: SavingsProductType[];
-  savingsProductCalculatorParameters: Partial<SavingsProductCalculatorParameters>;
+  calculatorParameters: Partial<SavingsProductCalculatorParameters>;
 };
 
-export default function ResultsTab({
-  selectedSavingsProduct,
-  savingsProductCalculatorParameters,
-  savingsProductList,
-}: Props) {
-  if (!savingsProductCalculatorPolicy.validateParameters(savingsProductCalculatorParameters)) {
+export default function ResultsTab({ selectedSavingsProduct, calculatorParameters, savingsProductList }: Props) {
+  if (!savingsProductCalculatorPolicy.validateParameters(calculatorParameters)) {
     return <div>적금 계산기에 입력한 값을 확인해주세요.</div>;
   }
   const recommendedSavingsProductList = savingsProductCalculatorPolicy.getRecommendedSavingsProduct(savingsProductList);
@@ -23,10 +19,7 @@ export default function ResultsTab({
     <>
       <Spacing size={8} />
       {selectedSavingsProduct ? (
-        <CalculationResult
-          savingsProduct={selectedSavingsProduct}
-          savingsProductCalculatorParameters={savingsProductCalculatorParameters}
-        />
+        <CalculationResult savingsProduct={selectedSavingsProduct} calculatorParameters={calculatorParameters} />
       ) : (
         <ListRow contents={<ListRow.Texts type="1RowTypeA" top="상품을 선택해주세요." />} />
       )}

@@ -10,7 +10,7 @@ type Props = {
   ) => void;
 };
 
-export default function SavingsProductCalculator({ parameters, onParametersChange }: Props) {
+export default function SavingsProductCalculatorForm({ parameters, onParametersChange }: Props) {
   return (
     <>
       <TextField

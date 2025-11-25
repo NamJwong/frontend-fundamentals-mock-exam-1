@@ -6,16 +6,16 @@ import { SavingsProduct as SavingsProductType, SavingsProductCalculatorParameter
 
 type Props = {
   savingsProductList: SavingsProductType[];
-  savingsProductCalculatorParameters: Partial<SavingsProductCalculatorParameters>;
+  calculatorParameters: Partial<SavingsProductCalculatorParameters>;
   renderCalculatedSavingsProduct: (savingsProduct: SavingsProductType) => ReactNode;
 };
 
 export default function ProductsTab({
   savingsProductList,
   renderCalculatedSavingsProduct,
-  savingsProductCalculatorParameters,
+  calculatorParameters,
 }: Props) {
-  if (!savingsProductCalculatorPolicy.validateParameters(savingsProductCalculatorParameters)) {
+  if (!savingsProductCalculatorPolicy.validateParameters(calculatorParameters)) {
     return (
       <>
         <div>적금 계산기에 입력한 값을 확인해주세요.</div>
@@ -33,7 +33,7 @@ export default function ProductsTab({
 
   const calculatedSavingsProductList = savingsProductCalculatorPolicy.getCalculatedSavingsProduct(
     savingsProductList,
-    savingsProductCalculatorParameters
+    calculatorParameters
   );
   if (calculatedSavingsProductList.length === 0) {
     return <div>해당하는 적금 상품이 없습니다.</div>;

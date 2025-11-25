@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import SavingsProduct from 'components/SavingsProduct';
-import SavingsProductCalculator from 'components/SavingsProductCalculator';
+import SavingsProductCalculatorForm from 'components/savingsProductCalculator/CalculatorForm';
 import ProductsTab from 'pages/SavingsCalculatorPage/ProductsTab';
 import ResultsTab from 'pages/SavingsCalculatorPage/ResultsTab';
 import { useState } from 'react';
@@ -10,7 +10,7 @@ import { SavingsProduct as SavingsProductType, SavingsProductCalculatorParameter
 
 export function SavingsCalculatorPage() {
   const [selectedTab, setSelectedTab] = useState('products');
-  const [savingsProductCalculatorParameters, setSavingsProductCalculatorParameters] = useState<
+  const [calculatorParameters, setSavingsProductCalculatorParameters] = useState<
     Partial<SavingsProductCalculatorParameters>
   >({});
   const [selectedSavingsProduct, setSelectedSavingsProduct] = useState<SavingsProductType>();
@@ -34,8 +34,8 @@ export function SavingsCalculatorPage() {
     <>
       <NavigationBar title="적금 계산기" />
       <Spacing size={16} />
-      <SavingsProductCalculator
-        parameters={savingsProductCalculatorParameters}
+      <SavingsProductCalculatorForm
+        parameters={calculatorParameters}
         onParametersChange={updater => setSavingsProductCalculatorParameters(updater)}
       />
       <Spacing size={24} />
@@ -53,7 +53,7 @@ export function SavingsCalculatorPage() {
       {selectedTab === 'products' && (
         <ProductsTab
           savingsProductList={savingsProductListQuery.data}
-          savingsProductCalculatorParameters={savingsProductCalculatorParameters}
+          calculatorParameters={calculatorParameters}
           renderCalculatedSavingsProduct={savingsProduct => (
             <SavingsProduct
               savingsProduct={savingsProduct}
@@ -67,7 +67,7 @@ export function SavingsCalculatorPage() {
       {selectedTab === 'results' && (
         <ResultsTab
           savingsProductList={savingsProductListQuery.data}
-          savingsProductCalculatorParameters={savingsProductCalculatorParameters}
+          calculatorParameters={calculatorParameters}
           selectedSavingsProduct={selectedSavingsProduct}
         />
       )}
