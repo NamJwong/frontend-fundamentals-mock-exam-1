@@ -1,5 +1,5 @@
 import CalculationResult from 'components/savingsProductCalculator/CalculationResult';
-import SavingsProduct from 'components/SavingsProduct';
+import SavingsProductListRow from 'components/SavingsProductListRow';
 import { savingsProductCalculatorPolicy } from 'policies';
 import { Border, ListHeader, ListRow, Spacing } from 'tosslib';
 import { SavingsProduct as SavingsProductType, SavingsProductCalculatorParameters } from 'types';
@@ -30,7 +30,7 @@ export default function ResultsTab({ selectedSavingsProduct, calculatorParameter
       <Spacing size={12} />
       {recommendedSavingsProductList.length > 0 ? (
         recommendedSavingsProductList.map(savingsProduct => (
-          <SavingsProduct key={savingsProduct.id} savingsProduct={savingsProduct} />
+          <SavingsProductListRow key={savingsProduct.id} savingsProduct={savingsProduct} />
         ))
       ) : (
         <div>해당하는 적금 상품이 없습니다.</div>

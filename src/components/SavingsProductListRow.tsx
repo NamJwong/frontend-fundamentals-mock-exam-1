@@ -4,7 +4,7 @@ import { formatNumberToWon } from 'utils';
 
 type Props = { savingsProduct: SavingsProductType; onClick?: () => void; isSelected?: boolean };
 
-export default function SavingsProduct({
+export default function SavingsProductListRow({
   savingsProduct: { id, name, annualRate, availableTerms, maxMonthlyAmount, minMonthlyAmount },
   onClick,
   isSelected,

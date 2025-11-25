@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import SavingsProduct from 'components/SavingsProduct';
+import SavingsProductListRow from 'components/SavingsProductListRow';
 import SavingsProductCalculatorForm from 'components/savingsProductCalculator/CalculatorForm';
 import ProductsTab from 'pages/SavingsCalculatorPage/ProductsTab';
 import ResultsTab from 'pages/SavingsCalculatorPage/ResultsTab';
@@ -55,7 +55,7 @@ export function SavingsCalculatorPage() {
           savingsProductList={savingsProductListQuery.data}
           calculatorParameters={calculatorParameters}
           renderCalculatedSavingsProduct={savingsProduct => (
-            <SavingsProduct
+            <SavingsProductListRow
               savingsProduct={savingsProduct}
               onClick={() => handleSelectedSavingsProductChange(savingsProduct)}
               isSelected={selectedSavingsProduct?.id === savingsProduct.id}

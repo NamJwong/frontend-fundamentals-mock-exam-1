@@ -1,4 +1,4 @@
-import SavingsProduct from 'components/SavingsProduct';
+import SavingsProductListRow from 'components/SavingsProductListRow';
 import { savingsProductCalculatorPolicy } from 'policies';
 import { Fragment, ReactNode } from 'react';
 import { ListHeader, Spacing } from 'tosslib';
@@ -25,7 +25,7 @@ export default function ProductsTab({
         />
         <Spacing size={12} />
         {savingsProductList.map(savingsProduct => (
-          <SavingsProduct key={savingsProduct.id} savingsProduct={savingsProduct} />
+          <SavingsProductListRow key={savingsProduct.id} savingsProduct={savingsProduct} />
         ))}
       </>
     );
