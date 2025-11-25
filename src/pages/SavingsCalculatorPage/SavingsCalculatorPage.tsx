@@ -54,7 +54,7 @@ export function SavingsCalculatorPage() {
         <ProductsTab
           savingsProductList={savingsProductListQuery.data}
           savingsProductCalculatorParameters={savingsProductCalculatorParameters}
-          renderSavingsProduct={savingsProduct => (
+          renderCalculatedSavingsProduct={savingsProduct => (
             <SavingsProduct
               savingsProduct={savingsProduct}
               onClick={() => handleSelectedSavingsProductChange(savingsProduct)}

@@ -1,6 +1,9 @@
 import { SavingsProduct, SavingsProductCalculatorParameters } from 'types';
 
-const filterSavingsProduct = (savingsProductList: SavingsProduct[], parameters: SavingsProductCalculatorParameters) =>
+const getCalculatedSavingsProduct = (
+  savingsProductList: SavingsProduct[],
+  parameters: SavingsProductCalculatorParameters
+) =>
   savingsProductList.filter(savingsProduct => {
     const 월납입액이_범위_내에_있음 =
       savingsProduct.minMonthlyAmount < parameters.desiredMonthlyDeposit &&
@@ -42,7 +45,7 @@ const getRecommendedSavingsProduct = (savingsProductList: SavingsProduct[]) => {
 };
 
 export const savingsProductCalculatorPolicy = {
-  filterSavingsProduct,
+  getCalculatedSavingsProduct,
   validateParameters,
   calculate_목표_금액과의_차이,
   calculate_예상_수익_금액,

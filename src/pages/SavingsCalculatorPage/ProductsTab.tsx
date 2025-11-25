@@ -1,30 +1,45 @@
+import SavingsProduct from 'components/SavingsProduct';
 import { savingsProductCalculatorPolicy } from 'policies';
 import { Fragment, ReactNode } from 'react';
-import { SavingsProduct, SavingsProductCalculatorParameters } from 'types';
+import { ListHeader, Spacing } from 'tosslib';
+import { SavingsProduct as SavingsProductType, SavingsProductCalculatorParameters } from 'types';
 
 type Props = {
-  savingsProductList: SavingsProduct[];
+  savingsProductList: SavingsProductType[];
   savingsProductCalculatorParameters: Partial<SavingsProductCalculatorParameters>;
-  renderSavingsProduct: (savingsProduct: SavingsProduct) => ReactNode;
+  renderCalculatedSavingsProduct: (savingsProduct: SavingsProductType) => ReactNode;
 };
 
 export default function ProductsTab({
   savingsProductList,
-  renderSavingsProduct,
+  renderCalculatedSavingsProduct,
   savingsProductCalculatorParameters,
 }: Props) {
   if (!savingsProductCalculatorPolicy.validateParameters(savingsProductCalculatorParameters)) {
-    // TODO: 모든 적금 상품 보기 추가
-    return <div>적금 계산기에 입력한 값을 확인해주세요.</div>;
+    return (
+      <>
+        <div>적금 계산기에 입력한 값을 확인해주세요.</div>
+        <Spacing size={8} />
+        <ListHeader
+          title={<ListHeader.TitleParagraph fontWeight="bold">모든 적금 상품 둘러보기</ListHeader.TitleParagraph>}
+        />
+        <Spacing size={12} />
+        {savingsProductList.map(savingsProduct => (
+          <SavingsProduct key={savingsProduct.id} savingsProduct={savingsProduct} />
+        ))}
+      </>
+    );
   }
 
-  const filteredSavingsProductList = savingsProductCalculatorPolicy.filterSavingsProduct(
+  const calculatedSavingsProductList = savingsProductCalculatorPolicy.getCalculatedSavingsProduct(
     savingsProductList,
     savingsProductCalculatorParameters
   );
-  if (filteredSavingsProductList.length === 0) {
+  if (calculatedSavingsProductList.length === 0) {
     return <div>해당하는 적금 상품이 없습니다.</div>;
   }
 
-  return savingsProductList.map(savings => <Fragment key={savings.id}>{renderSavingsProduct(savings)}</Fragment>);
+  return calculatedSavingsProductList.map(savings => (
+    <Fragment key={savings.id}>{renderCalculatedSavingsProduct(savings)}</Fragment>
+  ));
 }
