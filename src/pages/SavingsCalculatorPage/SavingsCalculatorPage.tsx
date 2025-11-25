@@ -10,9 +10,7 @@ import { SavingsProduct as SavingsProductType, SavingsProductCalculatorParameter
 
 export function SavingsCalculatorPage() {
   const [selectedTab, setSelectedTab] = useState('products');
-  const [calculatorParameters, setSavingsProductCalculatorParameters] = useState<
-    Partial<SavingsProductCalculatorParameters>
-  >({});
+  const [calculatorParameters, setCalculatorParameters] = useState<Partial<SavingsProductCalculatorParameters>>({});
   const [selectedSavingsProduct, setSelectedSavingsProduct] = useState<SavingsProductType>();
 
   const savingsProductListQuery = useQuery({ queryKey: ['savingsProductList'], queryFn: getSavingsProductList });
@@ -36,7 +34,7 @@ export function SavingsCalculatorPage() {
       <Spacing size={16} />
       <SavingsProductCalculatorForm
         parameters={calculatorParameters}
-        onParametersChange={updater => setSavingsProductCalculatorParameters(updater)}
+        onParametersChange={updater => setCalculatorParameters(updater)}
       />
       <Spacing size={24} />
       <Border height={16} />
